@@ -29,6 +29,7 @@ function entrar(req, res) {
     var senha = req.body.senhaServer;
 
     if (email == undefined) {
+
         res.status(400).send("Seu email está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
@@ -65,6 +66,7 @@ function cadastrar(req, res) {
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
+    
 
     // Faça as validações dos valores
     if (nome == undefined) {
