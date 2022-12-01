@@ -8,14 +8,32 @@
     <link rel="shortcut icon" href="./imgs/pilulas2.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/modal.css">
     <script src="./js/funcoes.js"></script>
     <title>Login</title>
 </head>
 
 <body>
+
+
+    <div class="corpoModal" id="corpoModal">
+        <div class="modalDeAviso" id="corpoModal">
+            <div class="botaoModal" id="botaoModal">
+                <button class="letra-x" onclick="sumirModal()"></button>
+            </div>
+            <div class="titulo" id="tituloModal">
+                Atenção!
+            </div>
+            <div class="corpo" id="corpoTextoModal">
+                Revise e preencha todos os campos!
+            </div>
+        </div>
+    </div>
+
+
     <a href="index.html">
         <div class="logo">
-            <img src="assets/imgs/voltar.png" alt="" >
+            <img src="assets/imgs/voltar.png" alt="">
         </div>
     </a>
     <div class="corpo">
@@ -23,7 +41,7 @@
             <div class="formulario">
                 <img src="assets/imgs/pilulas2.png" alt="" width="20%" class="imagemLogin"><br>
                 <h1>Bem vindo novamente!</h1>
-               
+
                 <div class="campo">
                     <!-- <label for="in_login">Login</label> -->
                     <input type="text" id="in_login" placeholder="Email" class="emailBackground">
@@ -42,7 +60,7 @@
                     </div>
                 </div>
                 <div class="button2">
-                    <button class="login" onclick="logar()">Logar</button>
+                    <button class="login" onclick="entrar()">Logar</button>
                 </div>
             </div>
         </div>
@@ -60,6 +78,7 @@
 <script>
 
 
+
     function entrar() {
         aguardar();
 
@@ -67,13 +86,10 @@
         var senha = in_senha.value
 
         if (email == "" || senha == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
+
+            corpoModal.style.display = "block"
+
             return false;
-        }
-        else {
-            setInterval(sumirMensagem, 5000)
         }
 
         console.log("FORM LOGIN: ", email);
@@ -102,8 +118,17 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
 
+                    corpoModal.style.display = "block"
+                    botaoModal.style.display = 'none'
+                    tituloModal.innerHTML = 'Login realizado com sucesso!'
+                    corpoTextoModal.innerHTML = 'Redirecionando para a dashboard...'
+                    setTimeout(() => {
+                        sumirMensagem();
+                    }, "3000")
+
+
                     setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
+                        window.location = "dashboard/dashgeral.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
@@ -125,8 +150,5 @@
         return false;
     }
 
-    function sumirMensagem() {
-        cardErro.style.display = "none"
-    }
 
 </script>

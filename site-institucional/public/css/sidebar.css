@@ -24,22 +24,23 @@ header{
 }
 
 .sair{
-    padding: 5px;
-    background-color: #5acbda;
-    text-decoration: none;
-    float: right;
-    margin-top: -30px;
-    margin-right: 40px;
-    border-radius: 2px;
-    font-size: 15px;
-    font-weight: 500;
-    color: #ffff;
+    width: 5vw;
+    height: 4vh;
+    position: absolute;
+    top: 1%;
+    right: 3%;
+    border-radius: 10px;
+    border: 2px solid #5acbda;
+    background-color: #ffffff;
     transition: 0.5s;
+    cursor:pointer;
     transition-property: background;
 }
 
 .sair:hover{
-    background-color: #42baca;
+    background-color:#eee;
+    transition: 0.5s;
+    cursor:pointer;
 }
 
 .sidebar{

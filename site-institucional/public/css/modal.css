@@ -1,0 +1,57 @@
+.corpoModal{
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #00000077;
+    z-index: 5;
+}
+
+
+
+.modalDeAviso{
+    height: 30%;
+    width: 30%;
+    margin: 15% auto;
+    background-color: #5acbdaff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.modalDeAviso .titulo{
+    /* color:#ff6961; */
+    margin-top: 3%;
+    font-weight: bold;
+}
+
+
+.botaoModal{
+    width: 95%;
+    height: 25%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.letra-x{
+    width: 5%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('../assets/imgs/letra-x.png');   
+}
+
+.letra-x:hover{
+    cursor: pointer;
+}
+
+.letra-x:active{
+    outline: 0;
+}
