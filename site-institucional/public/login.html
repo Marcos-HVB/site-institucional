@@ -84,7 +84,8 @@
 
         var email = in_login.value
         var senha = in_senha.value
-
+        const elements = document.getElementsByClassName('corpoModal');
+        
         if (email == "" || senha == "") {
 
             corpoModal.style.display = "block"
@@ -118,7 +119,7 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
 
-                    corpoModal.style.display = "block"
+                    elements[0].style.display = "block"
                     botaoModal.style.display = 'none'
                     tituloModal.innerHTML = 'Login realizado com sucesso!'
                     corpoTextoModal.innerHTML = 'Redirecionando para a dashboard...'

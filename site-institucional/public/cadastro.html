@@ -95,6 +95,8 @@
 
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
+        const elements = document.getElementsByClassName('corpoModal');
+       
         var primeiroNome = in_primeiroNome.value
         var sobrenome = in_sobrenome.value
         var empresa = in_empresa.value
@@ -105,7 +107,8 @@
         var confirmarSenha = in_confirmarSenha.value
 
         if (primeiroNome == "" || sobrenome == "" || empresa == "" || unidade == "" || cargo == "" || email == "" || senha == "" || confirmarSenha == "") {
-            corpoModal.style.display = "block"
+            
+            elements[0].style.display = "block"
             
             return false;
         }
@@ -133,7 +136,7 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                corpoModal.style.display = "block"
+                elements[0].style.display = "block"
                 botaoModal.style.display = 'none'
                 tituloModal.innerHTML = 'Cadastro realizado com sucesso!'
                 corpoTextoModal.innerHTML = 'Redirecionando para a tela de login...'
