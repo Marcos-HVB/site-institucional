@@ -54,9 +54,13 @@ function fecharModal() {
 
 
 function sumirModal(){
-    corpoModal.style.display = "none"
+    const elements = document.getElementsByClassName('corpoModal');
+   
+    elements[0].style.display = "none"
 }
 
 function sumirMensagem() {
-    corpoModal.style.display = "none"
+    const elements = document.getElementsByClassName('corpoModal');
+   
+    elements[0].style.display = "none"
 }

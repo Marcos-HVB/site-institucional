@@ -34,7 +34,7 @@ header{
     background-color: #ffffff;
     transition: 0.5s;
     cursor:pointer;
-    transition-property: background;
+    
 }
 
 .sair:hover{
