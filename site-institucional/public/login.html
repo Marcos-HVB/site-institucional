@@ -81,20 +81,15 @@
 
     function entrar() {
         aguardar();
-        const elements = document.getElementsByClassName('corpoModal');
+        // const elements = document.getElementsByClassName('corpoModal');
 
         var email = in_login.value
         var senha = in_senha.value
-<<<<<<< HEAD
 
-        if (email == "" || senha == ""){
-=======
-        const elements = document.getElementsByClassName('corpoModal');
-        
         if (email == "" || senha == "") {
->>>>>>> 9e3f4e6e3b17818c87ecd7607cdfb21409999fa1
 
-            corpoModal.style.display = "block"
+            const elements = document.getElementsByClassName('corpoModal');
+            elements[0].style.display = "block"
 
             return false;
         }
@@ -125,10 +120,10 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     // sessionStorage.IDUSUARIO_USUARIO = json.id;
 
-                    elements[0].style.display = "block"
-                    botaoModal.style.display = 'none'
-                    tituloModal.innerHTML = 'Login realizado com sucesso!'
-                    corpoTextoModal.innerHTML = 'Redirecionando para a dashboard...'
+                    // elements[0].style.display = "block"
+                    // botaoModal.style.display = 'none'
+                    // tituloModal.innerHTML = 'Login realizado com sucesso!'
+                    // corpoTextoModal.innerHTML = 'Redirecionando para a dashboard...'
                     setTimeout(() => {
                         sumirMensagem();
                     }, "3000")

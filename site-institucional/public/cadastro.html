@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="assets/imgs/pilulas2.png" type="image/x-icon">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/cadastro.css">
-        <link rel="stylesheet" href="css/modal.css">
-        <script src="./js/funcoes.js"></script>
-        <title>Cadastro</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/imgs/pilulas2.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cadastro.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <script src="./js/funcoes.js"></script>
+    <title>Cadastro</title>
+</head>
 
 <body>
 
@@ -96,7 +96,7 @@
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
         const elements = document.getElementsByClassName('corpoModal');
-       
+
         var primeiroNome = in_primeiroNome.value
         var sobrenome = in_sobrenome.value
         var empresa = in_empresa.value
@@ -107,13 +107,8 @@
         var confirmarSenha = in_confirmarSenha.value
 
         if (primeiroNome == "" || sobrenome == "" || empresa == "" || unidade == "" || cargo == "" || email == "" || senha == "" || confirmarSenha == "") {
-<<<<<<< HEAD
-            corpoModal.style.display ='block'
-=======
-            
+            const elements = document.getElementsByClassName('corpoModal');
             elements[0].style.display = "block"
->>>>>>> 9e3f4e6e3b17818c87ecd7607cdfb21409999fa1
-            
             return false;
         }
 
@@ -129,10 +124,10 @@
                 // Agora vá para o arquivo routes/usuario.js
                 primeiroNomeServer: primeiroNome,
                 sobrenomeServer: sobrenome,
-                empresaServer: empresa,
-                unidadeServer: unidade,
                 cargoServer: cargo,
                 emailServer: email,
+                unidadeServer: unidade,
+                empresaServer: empresa,
                 senhaServer: senha
             })
         }).then(function (resposta) {
@@ -147,12 +142,12 @@
                 setTimeout(() => {
                     sumirMensagem();
                 }, "3000")
-                
+
 
                 setTimeout(() => {
                     window.location = "login.html";
                 }, "2000")
-                
+
                 // limparFormulario();
                 // finalizarAguardar();
             } else {
