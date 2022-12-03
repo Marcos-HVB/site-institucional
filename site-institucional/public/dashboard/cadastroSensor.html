@@ -37,15 +37,9 @@
                     <input type="text" id="in_setor" placeholder="Setor">
                 </div>
                 <div class="campo">
-                    <input type="text" id="in_empresa" placeholder="Empresa">
-                </div>
-                <div class="campo">
-                    <input type="text" id="in_unidade" placeholder="Unidade">
-                </div>
-                <div class="campo">
                     <input type="text" id="in_remedio" placeholder="Remédio">
                 </div>
-        
+
                 <div class="campoCheck">
                     <div class="checkbox">
                         <input type="checkbox" id="checkRemember">
@@ -64,22 +58,70 @@
 </html>
 
 <script>
+    function cadastrarsensor() {
+        // aguardar();
 
-    function cadastrar() {
-        var primeiroNome = in_primeiroNome.value
-        var sobrenome = in_sobrenome.value
-        var empresa = in_empresa.value
-        var unidade = in_unidade.value
-        var cargo = in_cargo.value
-        var email = in_email.value
-        var senha = in_senha.value
-        var confirmarSenha = in_confirmarSenha.value
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        // const elements = document.getElementsByClassName('corpoModal');
 
-        if (primeiroNome == "" || sobrenome == "" || empresa == "" || unidade == "" || cargo == "" || email == "" || senha == "" || confirmarSenha == "") {
-            alert('Preencha todos os campos')
-        }else{
-            window.location.href = 'login.html'
+        var nomesensor = in_sensor.value
+        var setor   = in_setor.value
+        var remedio = in_remedio.value
+
+        if (primeiroNome == "" || sobrenome == "" || unidade == "" || cargo == "" || email == "" || senha == "" || confirmarSenha == "") {
+            // const elements = document.getElementsByClassName('corpoModal');
+            // elements[0].style.display = "block"
+            return false;
         }
+
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomesensorServer:nomesensor,
+                setorServer:setor,
+                remedioServer:remedio
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                // elements[0].style.display = "block"
+                // botaoModal.style.display = 'none'
+                // tituloModal.innerHTML = 'Cadastro realizado com sucesso!'
+                // corpoTextoModal.innerHTML = 'Redirecionando para a tela de login...'
+                setTimeout(() => {
+                    sumirMensagem();
+                }, "3000")
+
+
+                // setTimeout(() => {
+                //     window.location = "login.html";
+                // }, "2000")
+
+                // limparFormulario();
+                // finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
     }
+
+
+
+
 
 </script>
