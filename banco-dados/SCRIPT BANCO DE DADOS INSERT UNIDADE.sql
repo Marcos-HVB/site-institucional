@@ -55,6 +55,18 @@ idmedida int primary key,
 temperatura decimal(3,1),
 umidade decimal(3,1));
 
+insert medida values
+(1,12.3,25.1),
+(2,10.0,24.7),
+(3,09.2,23.0),
+(4,11.1,20.1),
+(5,15.8,27.2),
+(6,16.1,28.1),
+(7,14.3,26.1),
+(8,12.3,21.1),
+(9,11.0,22.7);
+
+
 
 select temperatura,umidade,sensor.idsensor,setor.idsetor from medida join relatorio on idmedida=fksensor join  sensor on fksensor=idsensor join setor on sensor.fksetor=setor.idsetor;
 
