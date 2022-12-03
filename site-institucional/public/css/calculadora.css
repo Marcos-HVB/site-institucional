@@ -1,3 +1,9 @@
+.vermelho{
+    color: #f00
+}
+
+
+
 .containerCalc{
     padding-top: 10%;
 }
@@ -5,8 +11,10 @@
 .texto{
     width: 50%;
     height: 60vh;   
-    border-radius: 100%;
+    border-radius: 50%;
     background-size: cover;
+    background-position: top;
+    /* background-color: #f00; */
     background-repeat: no-repeat; 
     background-image: url('../imgs/simuladorFinanceiro.png' );
 }
@@ -24,12 +32,14 @@
 .form input{
     margin:1% 2% 2% 2%;
     height: 25px;
-    border-radius: 10px;
+    border-radius: 5px;
+    padding: 1%;
     border: 2px solid #5acbda;
 }
 
 .form label{
     margin: 1%;
+
 }
 
 .organizador{
@@ -47,5 +57,16 @@
     display: flex;
     flex-direction: row;
 
+}
+
+
+.saida{
+    margin-top: 5%;
+    width: 90%;
+    
+}
+
+input:focus{
+    outline: 0;
 }
 

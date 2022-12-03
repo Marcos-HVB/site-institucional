@@ -57,16 +57,16 @@
 
                 <div class="form">
                     
-                    <label for="inpMedi">Nome do medicamento</label>
+                    <label for="inpMedi">Nome do medicamento:</label>
                     <input id="inpMedi" class="">
                     
-                    <label for="inpValor">Valor do Medicamento</label>
+                    <label for="inpValor">Valor do Medicamento:</label>
                     <input id="inpValor">
 
-                    <label for="inpQuant">Quantidade de caixas</label>
+                    <label for="inpQuant">Quantidade de caixas:</label>
                     <input id="inpQuant">
 
-                    <button onclick="calcular()" class="logout" id="btnCalc">Calcular</button>
+                    <button onclick="calcular()" class="login" id="btnCalc">Calcular</button>
 
                     <div class="saida" id="output"></div>
                 </div>
@@ -92,9 +92,9 @@
         final = total - porce;
         
         var porce = total * 0.2;
-        output.innerHTML=`Comprando ${quant} caixas do medicamento ${nome} você gasta R$ ${total}<br>
-                        Porém como indicam nossas pesquisas 20% desses medicamentos são perdidos pela falta de monitoramento, o que equivale a R$ ${porce}.<br>
-                        Uma perda considerável não é?`;
+        output.innerHTML=`Essa quantidade(${quant}) de caixas do medicamento ${nome} equivale a R$${total.toFixed(2)}.<br><br>
+                        Porém, como indicam nossas pesquisas, <span class="vermelho"> 20% desses medicamentos são perdidos</span> pela falta de monitoramento, o que equivale a R$${porce.toFixed(2)}.<br><br>
+                        Uma perda considerável, que poderia ser distribuida em outras necessidades da empresa`;
         
 
     }
