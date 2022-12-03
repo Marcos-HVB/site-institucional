@@ -44,8 +44,6 @@ primary key (idRemedio, fkSetor, fkUnidade)
 create table sensor(
 idSensor int,
 nomeSensor varchar(45),
-temperatura decimal(5,2),
-umidade decimal(5,2),
 dthora dateTime,
 fkSetor int,
 fkUnidade int,
@@ -53,6 +51,24 @@ foreign key (fkSetor) references setor(idSetor),
 foreign key (fkUnidade) references unidade(idUnidade),
 primary key (idSensor,fkSetor,fkUnidade) 
 );
+
+create table medida(
+idmedida int primary key,
+temperatura decimal(3,1),
+umidadade decimal(3,1));
+
+create table relatorio(
+fkmedida int,
+fksensor int,
+fksetor int,
+fkunidade int,
+primary key (fkmedida,fksensor,fksetor,fkunidade),
+foreign key (fkmedida) references medida(idmedida),
+foreign key (fksensor) references sensor(idsensor),
+foreign key (fksetor) references setor(idsetor),
+foreign key (fkunidade) references unidade(idunidade));
+
+
 
 
 
