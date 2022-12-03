@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../assets/imgs/pilulas2.png" type="image/x-icon">
+    <script src="../js/funcoes.js"></script>
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -34,14 +35,14 @@
         <center>
 
             <img src="../imgs/1840618-imagem-perfil-icone-masculino-icone-humano-ou-pessoa-sinal-e-simbolo-gratis-vetor.jpg" alt="" class="image">
-            <h2>Admin</h2>
+            <h2 id="nomeUsuario">Admin</h2>
 
         </center>
 
         <a href="#"><ion-icon name="analytics"></ion-icon><span>Visão Geral</span></a>
         <a href="dashsetorA.html"><ion-icon name="thermometer"></ion-icon><span>Setores</span></a>
         <a href="cadastroSensor.html"><ion-icon name="add-circle-outline"></ion-icon><span>Adicionar Setor</span></a>
-        <a href="../index.html"><ion-icon name="log-out"></ion-icon><span>Sair</span></a>
+        <a href="../login.html" onclick="limparSessao()"><ion-icon name="log-out"></ion-icon><span>Sair</span></a>
 
     </div>
     <!--Fim sidebar-->
@@ -95,6 +96,17 @@
                 </div>    
         </div>
     </div>
+
+</body>
+</html>
+
+
+<script>
+
+    nomeUsuario.innerHTML = sessionStorage.NOME_USUARIO
+
+</script>
+
 
     <!--Icones-->
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
@@ -186,5 +198,3 @@
         );
 
     </script>
-</body>
-</html>

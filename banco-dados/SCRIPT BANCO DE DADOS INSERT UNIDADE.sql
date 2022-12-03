@@ -1,4 +1,5 @@
 create database oncotech;
+
 use oncotech;
 
 create table unidade(
@@ -76,6 +77,8 @@ insert into unidade values
 (null,'Brainfarma','Unidade São Matheus','jose coutinho','1023','Tatuape','08424562',null,'04889112512220',3),
 (null,'Eurofarma','Unidade Matriz Tatuape','Mota souza','10','Tatuape','08498754','proximo ao HOSPITAL almeida','04966357511110',null),
 (null,'Medley Indústria Farmacêutica','Unidade Matriz Eng.Goulart','Av. Alameda','545','engenheiro goulart','08401123','Andar de cima a o restaurante','04966357000180',null);
+
+
 
 
 

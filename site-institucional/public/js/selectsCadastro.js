@@ -53,7 +53,7 @@ selectEmpresa.innerHTML += `${conteudo} </select>`
 function montarSelectUnidades(){
     var empresaEscolhida = sel_empresa.value
 
-    conteudoUnidade = `<select id="sel_unidade">
+    var conteudoUnidade = `<select id="sel_unidade">
                         <option selected disabled value="">UNIDADE</option> `
     
     unidades.forEach(unidade => {
