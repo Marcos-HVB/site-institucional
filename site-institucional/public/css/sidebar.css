@@ -70,17 +70,16 @@ header{
 .sidebar a{
 
     display: block;
-    width: 100%;
+    width: 60%;
     line-height: 60px;
     text-decoration: none;
-    padding-left:40px ;
-    box-sizing: border-box;
+    padding-left:30px ;
     transition: 0.5s;
     transition-property: background;
 }
 
 .sidebar a:hover{
-    background-color: #42baca ;
+    background-color: #42baca98 ;
 }
 
 .sidebar ion-icon{
@@ -123,6 +122,7 @@ label #btnSide:hover{
     font-size: 20px;
     margin-left: 170px;
     width: 80px;
+    
 }
 
 #check{
