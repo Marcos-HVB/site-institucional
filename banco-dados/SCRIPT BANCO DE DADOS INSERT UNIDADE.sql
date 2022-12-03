@@ -22,24 +22,22 @@ idSetor int auto_increment,
 nomeSetor varchar(45),
 localSetor varchar(45),
 fkUnidade int,
+fkRemedio int,
+foreign key (fkRemedio) references remedio(idremedio),
 foreign key (fkUnidade) references unidade(idUnidade),
 primary key (idSetor,fkUnidade)
 );
 
 
 create table remedio(
-idRemedio int auto_increment,
+idRemedio int primary key auto_increment,
 nomeRemedio varchar (45),
 quantidade int,
 valor decimal(7,2),
-tempIdeal decimal(5,2),
-umidIdeal decimal(5,2),
-fkSetor int,
-fkUnidade int,
-foreign key (fkUnidade) references unidade(idUnidade),
-foreign key (fkSetor) references setor(idSetor),
-primary key (idRemedio, fkSetor, fkUnidade)
+tempMin decimal(3,1),
+tempMax decimal (3,1)
 );
+
 
 create table sensor(
 idSensor int,
@@ -55,7 +53,10 @@ primary key (idSensor,fkSetor,fkUnidade)
 create table medida(
 idmedida int primary key,
 temperatura decimal(3,1),
-umidadade decimal(3,1));
+umidade decimal(3,1));
+
+
+select temperatura,umidade,sensor.idsensor,setor.idsetor from medida join relatorio on idmedida=fksensor join  sensor on fksensor=idsensor join setor on sensor.fksetor=setor.idsetor;
 
 create table relatorio(
 fkmedida int,
@@ -100,6 +101,8 @@ insert into unidade values
 
 select * from usuario;
 select * from unidade;
+
+
 
 
 
