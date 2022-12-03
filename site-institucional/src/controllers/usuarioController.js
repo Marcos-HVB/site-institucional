@@ -65,7 +65,6 @@ function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.primeiroNomeServer;
     var sobrenome= req.body.sobrenomeServer;
-    var empresa= req.body.empresaServer;
     var unidade= req.body.unidadeServer;
     var cargo= req.body.cargoServer;
     var email = req.body.emailServer;
@@ -88,9 +87,6 @@ function cadastrar(req, res) {
         res.status(400).send("Sua senha está undefined!");
     }else if(sobrenome==undefined){
         res.status(400).send("Sobrenome está undefined!")
-    } else if(empresa==undefined){
-        res.status(400).send("Empresa está undefined!")
-        console.log('entrou nas validações usuariocontroller')
     }else if(unidade==undefined){
         res.status(400).send("unidade está undefined!")
     }else if(cargo==undefined){

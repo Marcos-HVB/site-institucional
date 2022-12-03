@@ -51,11 +51,14 @@
                     <input type="text" id="in_primeiroNome" placeholder="Primeiro nome">
                     <input type="text" id="in_sobrenome" placeholder="Sobrenome">
                 </div>
-                <div class="campo">
-                    <input type="text" id="in_empresa" placeholder="Empresa">
-                </div>
-                <div class="campo">
-                    <input type="text" id="in_unidade" placeholder="Unidade">
+                <div class="selectsStyle">
+
+                    <div class="campoSelect" id="selectEmpresa">
+                        
+                    </div>
+                    <div class="campoSelect" id="selectUnidade">
+                        
+                    </div>
                 </div>
                 <div class="campo">
                     <input type="text" id="in_cargo" placeholder="Cargo">
@@ -86,9 +89,10 @@
 
 </html>
 
+
+<script src="js/selectsCadastro.js"></script>
+
 <script>
-
-
 
     function cadastrar() {
         aguardar();
@@ -99,14 +103,13 @@
 
         var primeiroNome = in_primeiroNome.value
         var sobrenome = in_sobrenome.value
-        var empresa = in_empresa.value
-        var unidade = in_unidade.value
+        var unidade = sel_unidade.value
         var cargo = in_cargo.value
         var email = in_email.value
         var senha = in_senha.value
         var confirmarSenha = in_confirmarSenha.value
 
-        if (primeiroNome == "" || sobrenome == "" || empresa == "" || unidade == "" || cargo == "" || email == "" || senha == "" || confirmarSenha == "") {
+        if (primeiroNome == "" || sobrenome == "" || unidade == "" || cargo == "" || email == "" || senha == "" || confirmarSenha == "") {
             const elements = document.getElementsByClassName('corpoModal');
             elements[0].style.display = "block"
             return false;
@@ -127,7 +130,6 @@
                 cargoServer: cargo,
                 emailServer: email,
                 unidadeServer: unidade,
-                empresaServer: empresa,
                 senhaServer: senha
             })
         }).then(function (resposta) {
