@@ -19,10 +19,10 @@ CREATE TABLE IF NOT EXISTS unidade (
 
 
 CREATE TABLE IF NOT EXISTS remedio (
-    idRemedio INT AUTO_INCREMENT,
+    idRemedio INT AUTO_INCREMENT primary key,
     nomeRemedio VARCHAR(45),
-    tempMin DECIMAL(5 , 2 ),
-    tempMax DECIMAL(5 , 2 )
+    tempMin DECIMAL(3 , 1 ),
+    tempMax DECIMAL(3 , 1 )
 );
 
 insert into remedio values
@@ -39,11 +39,14 @@ CREATE TABLE IF NOT EXISTS setor (
     idSetor INT AUTO_INCREMENT,
     nomeSetor VARCHAR(45),
     localSetor VARCHAR(45),
+    fkRemedio int,
+    foreign key (fkRemedio) references remedio(idRemedio),
     fkUnidade INT,
     FOREIGN KEY (fkUnidade)
-        REFERENCES unidade (idUnidade),
+	REFERENCES unidade (idUnidade),
     PRIMARY KEY (idSetor , fkUnidade)
 );
+
 
 
 CREATE TABLE IF NOT EXISTS usuario (
@@ -64,6 +67,7 @@ CREATE TABLE IF NOT EXISTS usuario (
 CREATE TABLE IF NOT EXISTS sensor (
     idSensor INT,
     nomeSensor VARCHAR(45),
+    dthora DATETIME,
     fkSetor INT,
     fkUnidade INT,
     FOREIGN KEY (fkSetor)
@@ -76,24 +80,23 @@ CREATE TABLE IF NOT EXISTS sensor (
 CREATE TABLE IF NOT EXISTS medida (
     idmedida INT PRIMARY KEY,
     temperatura DECIMAL(3 , 1 ),
-    umidadade DECIMAL(3 , 1 ),
-    dataHora datetime
+    umidadade DECIMAL(3 , 1 )
 );
 
 CREATE TABLE IF NOT EXISTS relatorio (
-    fkMedida INT,
-    fkSensor INT,
-    fkSetor INT,
-    fkUnidade INT,
-    PRIMARY KEY (fkMedida , fkSensor , fkSetor , fkUnidade),
-    FOREIGN KEY (fkMedida)
-        REFERENCES medida (idMedida),
-    FOREIGN KEY (fkSensor)
-        REFERENCES sensor (idSensor),
-    FOREIGN KEY (fkSetor)
-        REFERENCES setor (idSetor),
-    FOREIGN KEY (fkUnidade)
-        REFERENCES unidade (idUnidade)
+    fkmedida INT,
+    fksensor INT,
+    fksetor INT,
+    fkunidade INT,
+    PRIMARY KEY (fkmedida , fksensor , fksetor , fkunidade),
+    FOREIGN KEY (fkmedida)
+        REFERENCES medida (idmedida),
+    FOREIGN KEY (fksensor)
+        REFERENCES sensor (idsensor),
+    FOREIGN KEY (fksetor)
+        REFERENCES setor (idsetor),
+    FOREIGN KEY (fkunidade)
+        REFERENCES unidade (idunidade)
 );
 
 
@@ -107,6 +110,23 @@ insert into unidade values
 (null,'Brainfarma','Unidade São Matheus','jose coutinho','1023','Tatuape','08424562',null,'04889112512220',3),
 (null,'Eurofarma','Unidade Matriz Tatuape','Mota souza','10','Tatuape','08498754','proximo ao HOSPITAL almeida','04966357511110',null),
 (null,'Medley Indústria Farmacêutica','Unidade Matriz Eng.Goulart','Av. Alameda','545','engenheiro goulart','08401123','Andar de cima a o restaurante','04966357000180',null);
+
+select * from setor;
+select * from remedio;
+select * from unidade;
+
+
+insert into setor values
+(null,'Setor Talidomida','Ala 1B 2ºAndar',1,1),
+(null,'Setor Mesilato de Imatinibe','Ala A 5ºAndar',2,1),
+(null,'Setor Dasatinibe','Ala A 2ºAndar',3,2),
+(null,'Setor Rituximabe','Ala B 3ºAndar',4,5),
+(null,'Setor Transtuzumabe','Ala M 5ºAndar',5,3),
+(null,'Setor Nilotinibe','Ala C 6ºAndar',6,7),
+(null,'Setor Pertuzumabe','Ala 2B 7ºAndar',7,2),
+(null,'Setor Zidovudina','Ala D 2ºAndar',8,5);
+
+
 
 
 select temperatura,umidade,idSensor,idSetor from medida join relatorio on idMedida=fkMedida join sensor on fkSensor=idSensor join setor on sensor.fkSetor =idSetor;
