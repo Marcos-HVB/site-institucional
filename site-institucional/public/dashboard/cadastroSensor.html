@@ -130,7 +130,7 @@
 
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
-        // const elements = document.getElementsByClassName('corpoModal');
+        const elements = document.getElementsByClassName('corpoModal');
 
         var nomeSensor = in_nomeSensor.value
         var fkSetor = sel_setor.value
@@ -165,13 +165,16 @@
                 botaoModal.style.display = 'none'
                 tituloModal.innerHTML = 'Cadastro realizado com sucesso!'
                 corpoTextoModal.innerHTML = ''
+            
 
                 setTimeout(() => {
                     sumirMensagem();
                 }, "3000")
+                window.location = "dashgeral.html";
 
                 // limparFormulario();
                 // finalizarAguardar();
+                alert('sensor cadastrado  com sucesso')
             } else {
                 throw ("Houve um erro ao tentar realizar o cadastro!");
             }
