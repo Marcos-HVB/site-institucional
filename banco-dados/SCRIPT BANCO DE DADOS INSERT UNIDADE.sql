@@ -64,7 +64,6 @@ CREATE TABLE IF NOT EXISTS usuario (
 CREATE TABLE IF NOT EXISTS sensor (
     idSensor INT,
     nomeSensor VARCHAR(45),
-    dthora DATETIME,
     fkSetor INT,
     fkUnidade INT,
     FOREIGN KEY (fkSetor)
@@ -77,23 +76,24 @@ CREATE TABLE IF NOT EXISTS sensor (
 CREATE TABLE IF NOT EXISTS medida (
     idmedida INT PRIMARY KEY,
     temperatura DECIMAL(3 , 1 ),
-    umidadade DECIMAL(3 , 1 )
+    umidadade DECIMAL(3 , 1 ),
+    dataHora datetime
 );
 
 CREATE TABLE IF NOT EXISTS relatorio (
-    fkmedida INT,
-    fksensor INT,
-    fksetor INT,
-    fkunidade INT,
-    PRIMARY KEY (fkmedida , fksensor , fksetor , fkunidade),
-    FOREIGN KEY (fkmedida)
-        REFERENCES medida (idmedida),
-    FOREIGN KEY (fksensor)
-        REFERENCES sensor (idsensor),
-    FOREIGN KEY (fksetor)
-        REFERENCES setor (idsetor),
-    FOREIGN KEY (fkunidade)
-        REFERENCES unidade (idunidade)
+    fkMedida INT,
+    fkSensor INT,
+    fkSetor INT,
+    fkUnidade INT,
+    PRIMARY KEY (fkMedida , fkSensor , fkSetor , fkUnidade),
+    FOREIGN KEY (fkMedida)
+        REFERENCES medida (idMedida),
+    FOREIGN KEY (fkSensor)
+        REFERENCES sensor (idSensor),
+    FOREIGN KEY (fkSetor)
+        REFERENCES setor (idSetor),
+    FOREIGN KEY (fkUnidade)
+        REFERENCES unidade (idUnidade)
 );
 
 
