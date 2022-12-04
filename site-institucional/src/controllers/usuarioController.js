@@ -69,13 +69,6 @@ function cadastrar(req, res) {
     var cargo= req.body.cargoServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
-    // primeiroNomeServer: primeiroNome,
-    // sobrenomeServer: sobrenome,
-    // empresaServer: empresa,
-    // unidadeServer: unidade,
-    // cargoServer: cargo,
-    // emailServer: email,
-    // senhaServer: senha
     
 
     // Faça as validações dos valores
