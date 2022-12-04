@@ -125,7 +125,9 @@ insert into setor values
 (null,'Setor Transtuzumabe','Ala M 5ºAndar',5,3),
 (null,'Setor Nilotinibe','Ala C 6ºAndar',6,7),
 (null,'Setor Pertuzumabe','Ala 2B 7ºAndar',7,2),
-(null,'Setor Zidovudina','Ala D 2ºAndar',8,5);
+(null,'Setor Zidovudina','Ala D 3ºAndar',8,6),
+(null,'Setor Zidovudina','Ala D 2ºAndar',8,6),
+(null,'Setor Zidovudina','Ala D 1ºAndar',8,6);
 
 select avg(temperatura),avg(umidade) from medida;
 
