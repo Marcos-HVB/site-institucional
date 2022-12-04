@@ -61,7 +61,7 @@
                     
                     <div class="contGraf">
                         <h3>Medidas médias por horário</h3>
-                        <canvas id="Linhas" class="grafico"></canvas>
+                        <canvas id="myChart" class="grafico"></canvas>
                     </div>
 
                     <div class="contGraf">
@@ -113,89 +113,106 @@
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
     <!--Script Gráficos-->
+<script>
 
-    <script>
-        //Linhas
-        const labelslin = [
-          '12:00',
-          '13:00',
-          '14:00',
-          '15:00',
-          '16:00',
-          '17:00',
-          '18:00',
-          '19:00',
-          '20:00',
-        ];
-      
-        const linhas = {
-          labels: labelslin,
+    let proximaAtualizacao;
+    window.onload = obterDadosGrafico(1);
+
+    // O gráfico é construído com três funções:
+    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+
+    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+
+    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    //     Para ajustar o "select", ajuste o comando sql em src/models
+    function obterDadosGrafico(idMedida) {
+
+
+        if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
+
+        fetch(`/medidas/ultimas/${idMedida}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico(resposta, idMedida);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+    function plotarGrafico(resposta) {
+
+console.log('iniciando plotagem do gráfico...');
+
+// Criando estrutura para plotar gráfico - labels
+let labels = [];
+
+// Criando estrutura para plotar gráfico - dados
+const linhas = {
+          labels: labels,
           datasets: [{
             label: 'Temperatura',
             backgroundColor: '#E393A6',
             borderColor: '#E393A6',
-            data: [9, 10, 10.5, 9, 8, 13, 15, 18, 20, 15],
+            data: [],
         },
         {
             label: 'Umidade',
             backgroundColor:  '#5acbda',
             borderColor: '#5acbda',
-            data: [80, 76, 70, 75, 65, 73, 87, 89, 95, 85],
+            data: [],
         }
         ]
         };
 
         //Barras
 
-        const labelsbar = [
-          'Segunda',
-          'Terça',
-          'Quarta',
-          'Quinta',
-          'Sexta',
-          'Sábado',
-          'Domingo',
-        ];
-      
-        const barras = {
-          labels: labelsbar,
-          datasets: [{
-            label: 'Mediana de Temperatura ',
-            backgroundColor: '#E393A6',
-            borderColor: '#E393A6',
-            data: [11.75, 12, 11.2, 10, 10.5, 14, 12.3],
-        },
-        {
-            label: 'Mediana de Umidade ',
-            backgroundColor:  '#5acbda',
-            borderColor: '#5acbda',
-            data: [70, 79, 73, 80, 65, 70, 70],
-        }
-        ]
-        };
-      
-        const configlin = {
-          type: 'line',
-          data: linhas,
-          options: {}
-        };
 
-        const configbar = {
-          type: 'bar',
-          data: barras,
-          options: {}
-        };
-    </script>
-    
-    <script>
-        const chLinha = new Chart(
-          document.getElementById('Linhas'),
-          configlin
-        );
+console.log('----------------------------------------------')
+console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+console.log(resposta)
 
-        const chBarra = new Chart(
-          document.getElementById('Barras'),
-          configbar
-        );
+// Inserindo valores recebidos em estrutura para plotar o gráfico
+for (i = 0; i < resposta.length; i++) {
+    var registro = resposta[i];
+    labels.push(registro.medida);
+    dados.datasets[0].data.push(registro.Umidade);
+    dados.datasets[1].data.push(registro.Temperatura);
+}
 
-    </script>
+console.log('----------------------------------------------')
+console.log('O gráfico será plotado com os respectivos valores:')
+console.log('Labels:')
+console.log(labels)
+console.log('Dados:')
+console.log(dados.datasets)
+console.log('----------------------------------------------')
+
+// Criando estrutura para plotar gráfico - config
+const config = {
+    type: 'line',
+    data: dados,
+};
+
+// Adicionando gráfico criado em div na tela
+let myChart = new Chart(
+    document.getElementById(`myChart`),
+    config
+);
+
+}
+
+
+</script>
