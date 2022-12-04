@@ -60,22 +60,33 @@
 
     </div>
     <!--Fim sidebar-->
-    <div class="containerGeral">
+    <!-- <div class="containerGeral"> -->
 
-        <div class="conteudoDash">
+    <div class="conteudoDash">
 
-            <h2>Visão Geral</h2>
+        <h2>Visão Geral</h2>
 
-            <div class="containerdash">
+        <div class="containerdash">
 
-                <div id="conteudoCards" class="conteudoCards">
-
-                </div>
-
+            <div id="conteudoCards" class="conteudoCards">
 
             </div>
+
+
+        </div>
+        <div class="avisos">
+
+            <div class="vermelho"> <h2>Estado critico</h2><br> <span> Se a Temperatura de seu sensor ULTRAPASSAR os 20.2ºC </span></div>
+
+            <div class="amarelo"> <h2>Atenção</h2><br><span>Temperatura do Sensor maior que 15Cº tome precauções</span></div>
+
+            <div class="verde"> <h2>Está tudo ok!</h2><br> <span> Temperatura abaixo de 13.2Cº</span></div>
+
+
+
         </div>
     </div>
+    <!-- </div> -->
 
 </body>
 
@@ -113,15 +124,15 @@
                             <hr>
                             0°C
                             </div>`
-                            
-                            if(contador % 2 != 0){
-                                // conteudoCards.innerHTML += '<br>'
-                            }
 
-                            
+                        if (contador % 2 != 0) {
+                            // conteudoCards.innerHTML += '<br>'
+                        }
+
+
                     });
 
-                    
+
 
 
                 });

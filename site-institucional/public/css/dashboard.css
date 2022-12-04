@@ -1,4 +1,4 @@
-.dash{
+.dash {
     width: 100%;
     height: 100%;
     margin-top: 1%;
@@ -12,12 +12,13 @@
 
 
 
-.helpdesk{
-   color: red;
+.helpdesk {
+    color: red;
     text-decoration: none;
 
 }
-.grafico{
+
+.grafico {
 
     width: 500px;
     display: flex;
@@ -25,44 +26,97 @@
 
 }
 
-h2{
+h2 {
     text-align: center;
     margin-top: 2%;
 
 }
 
-.conteudoDash{
-    
+.conteudoDash {
+
     width: 100%;
     height: 100vh;
     align-items: center;
-    
+
 }
 
-.containerdash{
+.containerdash {
 
-    float:left;
+    float: left;
     /* display: flex;
     flex-direction: column; */
-    width: 100%;
-    height: 100%;
-    padding-left: 10%;
-    
-    
+    width: 50%;
+    height: 50%;
+    padding-left: 25%;
+
+
 }
 
-.conteudoCards{
+.avisos {
+    margin-right: 30px;
+    /* margin-top: 25VH; */
+    display: flex;
+    flex-direction: column;
+    transition: 0.4s;
+
+}
+
+/* .avisos:hover {
+    transition: 0.4s;
+    box-shadow: -3px 3px #00000055;
+} */
+
+.avisos span {
+    font-size: 20px;
+}
+
+.verde {
+    padding: 25px;
+    background-color: green;
+    margin-top: 25%;
+}
+
+.vermelho {
+    padding: 25px;
+    margin-top: 15%;
+    background-color: red;
+}
+
+.amarelo {
+    padding: 25px;
+    margin-top: 30%;
+    background-color: yellow;
+
+}
+
+.verde:hover,
+.amarelo:hover,
+.vermelho:hover {
+    /* SE DESCOMENTAR ESSE PADDIN O BAGULHO VAI SE MEXER PRA EXPANDIR  */
+    /* padding: 35px; */
+    color: white;
+    transition: 0.4s;
+    /* box-shadow: -3px 3px #00000055; */
+
+}
+
+.amarelo {
+    color: black;
+}
+
+
+.conteudoCards {
     /* display: flex; */
     /* justify-content: space-around; */
 }
 
 
-.card{
+.card {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     font-size: 2.5rem;
-    color:#fff;
+    color: #fff;
     margin-top: 10%;
     width: 30vw;
     height: 20%;
@@ -72,17 +126,17 @@ h2{
     transition: 0.4s;
 }
 
-.card:hover{
+.card:hover {
     transition: 0.4s;
     box-shadow: -3px 3px #00000055;
 }
 
-.card hr{
+.card hr {
     width: 100%;
-    border:1px solid #fff;
+    border: 1px solid #fff;
 }
 
-.dado{
+.dado {
 
     display: flex;
     flex-direction: column;
@@ -98,7 +152,7 @@ h2{
 
 }
 
-.kpi1{
+.kpi1 {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -106,7 +160,7 @@ h2{
     align-items: center;
 }
 
-.kpi2{
+.kpi2 {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -116,19 +170,19 @@ h2{
 
 }
 
-.containerkpi{
+.containerkpi {
     display: flex;
     flex-direction: row;
 
 }
 
-.recados{
+.recados {
 
     display: flex;
     justify-content: space-evenly;
-    border-style:inset ;
+    border-style: inset;
     border-radius: 10px;
-    background-color:#ffffff99 ;
+    background-color: #ffffff99;
     margin: 5%;
     width: 100%;
     display: flex;
@@ -137,45 +191,45 @@ h2{
 
 }
 
-.contrecados{
+.contrecados {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 50%;
     text-align: center;
-    
+
 }
 
-.critico{
+.critico {
 
-    text-shadow: 0.1em 0.1em rgba(28, 28, 29, 0.482) ;
+    text-shadow: 0.1em 0.1em rgba(28, 28, 29, 0.482);
     font-size: 20;
     font-weight: bold;
-    margin:2%;
+    margin: 2%;
 
 }
-.temperaturaAlta{
+
+.temperaturaAlta {
 
     color: #FF4500;
     text-shadow: 0.1em 0.1em #ffa60086;
 }
 
-.atencao{
+.atencao {
 
     font-size: 20;
     font-weight: bold;
-    margin:2%;
+    margin: 2%;
 }
 
-.temperaturaBaixa{
+.temperaturaBaixa {
 
-    color: #00BFFF; 
+    color: #00BFFF;
     text-shadow: 0.1em 0.1em #4683b48a;
 }
 
-.temperaturaAlarmante{
+.temperaturaAlarmante {
 
     color: red;
 
 }
-
