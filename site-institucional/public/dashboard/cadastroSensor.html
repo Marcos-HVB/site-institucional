@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/funcoes.js"></script>
     <link rel="shortcut icon" href="../assets/imgs/pilulas2.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/modal.css">
@@ -35,10 +36,9 @@
                 </p>
                 <div class="campo">
                     <input type="text" id="in_nomeSensor" placeholder="Nome Sensor">
-                    <input type="text" id="in_setor" placeholder="Setor">
                 </div>
                 <div class="campo" id="selectRemedio">
-                    
+
                 </div>
 
                 <div class="campoCheck">
@@ -59,13 +59,15 @@
 </html>
 
 
-<script src="../js/selectsRemedio.js"></script>
+
 
 <script>
 
-function relacaoSkins() {
+    
+
+    function relacaoSetores(unidade) {
         //aguardar();
-        fetch("/usuarios/listar").then(function (resposta) {
+        fetch(`/medidas/listar/${unidade}`).then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
                     var feed = document.getElementById("feed_container");
@@ -79,40 +81,28 @@ function relacaoSkins() {
 
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
-                    var maiorVotacao = resposta[0]
-                    var menorVotacao = resposta[0]
-                    
-                    // Math.min(resposta.count(caminhoImg)).caminhoImg
-                    
-                    for (let index = 0; index < resposta.length; index++) {
-                        
-                        if(resposta[index].votos > maiorVotacao.votos)
-                        maiorVotacao = resposta[index]
-                        
-                        if(resposta[index].votos < menorVotacao.votos)
-                        menorVotacao = resposta[index]
-                        
-                    }
+                    var conteudoSelect = `<select name="" id="sel_setor">
+                    <option value="" disabled selected>SETOR</option>`
 
 
-                    nomeSkin.innerHTML = `${maiorVotacao.nomePersonagem}: ${maiorVotacao.nomeSkin}`
-                    imgKpi1.style.backgroundImage = `url(${maiorVotacao.caminhoImg})`
+                    resposta.forEach(setor => {
 
-                    nomeSkin2.innerHTML = `${menorVotacao.nomePersonagem}: ${menorVotacao.nomeSkin}`
-                    imgKpi2.style.backgroundImage = `url(${menorVotacao.caminhoImg})`
+                        conteudoSelect += `<option value="${setor.idSetor}"> ${setor.nomeSetor}</option>`
 
+                    });
 
+                    selectRemedio.innerHTML = `${conteudoSelect} </select>`
                 });
             } else {
                 throw ('Houve um erro na API!');
             }
         }).catch(function (resposta) {
             console.error(resposta);
-            
+
         });
     }
 
-
+    relacaoSetores(sessionStorage.FK_UNIDADE)
 
 </script>
 
@@ -125,7 +115,7 @@ function relacaoSkins() {
         // const elements = document.getElementsByClassName('corpoModal');
 
         var nomesensor = in_sensor.value
-        var setor   = in_setor.value
+        var setor = in_setor.value
         var remedio = in_remedio.value
 
         if (primeiroNome == "" || sobrenome == "" || unidade == "" || cargo == "" || email == "" || senha == "" || confirmarSenha == "") {
@@ -144,9 +134,9 @@ function relacaoSkins() {
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                nomesensorServer:nomesensor,
-                setorServer:setor,
-                remedioServer:remedio
+                nomesensorServer: nomesensor,
+                setorServer: setor,
+                remedioServer: remedio
             })
         }).then(function (resposta) {
 

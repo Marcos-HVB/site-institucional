@@ -7,6 +7,11 @@ router.get("/ultimas/:idAquario", function (req, res) {
     medidaController.buscarUltimasMedidas(req, res);
 });
 
+router.get("/listar/:fkUsuario", function (req, res) {
+    medidaController.listar(req, res);
+});
+
+
 router.post("/cadastrarsensor", function (req, res) {
     usuarioController.cadastrarsensor(req, res);
 })
