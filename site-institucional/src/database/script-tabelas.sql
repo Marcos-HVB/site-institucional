@@ -111,7 +111,7 @@ insert into unidade values
 (null,'Eurofarma','Unidade Matriz Tatuape','Mota souza','10','Tatuape','08498754','proximo ao HOSPITAL almeida','04966357511110',null),
 (null,'Medley Indústria Farmacêutica','Unidade Matriz Eng.Goulart','Av. Alameda','545','engenheiro goulart','08401123','Andar de cima a o restaurante','04966357000180',null);
 
-select * from setor;
+
 select * from remedio;
 select * from unidade;
 select * from usuario;
@@ -127,7 +127,10 @@ insert into setor values
 (null,'Setor Pertuzumabe','Ala 2B 7ºAndar',7,2),
 (null,'Setor Zidovudina','Ala D 3ºAndar',8,6),
 (null,'Setor Zidovudina','Ala D 2ºAndar',8,6),
-(null,'Setor Zidovudina','Ala D 1ºAndar',8,6);
+(null,'Setor Zidovudina','Ala D 1ºAndar',8,6),
+(null,'Setor Zidovudina','Ala G 3ºAndar',8,4),
+(null,'Setor Zidovudina','Ala G 2ºAndar',8,4),
+(null,'Setor Zidovudina','Ala G 1ºAndar',8,4);
 
 select avg(temperatura),avg(umidade) from medida;
 

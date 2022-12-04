@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,21 +12,22 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>dashboard</title>
 </head>
+
 <body>
     <input type="checkbox" name="" id="check">
     <!-- Header -->
 
     <header>
         <label for="check">
-            <ion-icon name="menu" id="btnSide"></ion-icon>    
+            <ion-icon name="menu" id="btnSide"></ion-icon>
         </label>
 
-        <div class="logo"> 
+        <div class="logo">
             <img src="../assets/imgs/pilulas2.png" alt="">
             <span class="logotit"> ONCOTECH </span>
         </div>
 
-    
+
     </header>
     <!--Fim header-->
 
@@ -34,72 +36,108 @@
 
         <center>
 
-            <img src="../imgs/1840618-imagem-perfil-icone-masculino-icone-humano-ou-pessoa-sinal-e-simbolo-gratis-vetor.jpg" alt="" class="image">
+            <img src="../imgs/1840618-imagem-perfil-icone-masculino-icone-humano-ou-pessoa-sinal-e-simbolo-gratis-vetor.jpg"
+                alt="" class="image">
             <h2 id="nomeUsuario">Admin</h2>
 
         </center>
 
-        <a href="#"><ion-icon name="analytics"></ion-icon><span>Visão Geral</span></a>
-        <a href="dashsetorA.html"><ion-icon name="thermometer"></ion-icon><span>Setores</span></a>
-        <a href="cadastroSensor.html"><ion-icon name="add-circle-outline"></ion-icon><span>Adicionar Sensor</span></a>
-        <a href="../login.html" onclick="limparSessao()"><ion-icon name="log-out"></ion-icon><span>Sair</span></a>
-        <a href="https://hinovace.atlassian.net/servicedesk/customer/portal/2"> <ion-icon name="help"></ion-icon> <span> ajuda </span></a>
+        <a href="#">
+            <ion-icon name="analytics"></ion-icon><span>Visão Geral</span>
+        </a>
+        <a href="dashsetorA.html">
+            <ion-icon name="thermometer"></ion-icon><span>Setores</span>
+        </a>
+        <a href="cadastroSensor.html">
+            <ion-icon name="add-circle-outline"></ion-icon><span>Adicionar Sensor</span>
+        </a>
+        <a href="../login.html" onclick="limparSessao()">
+            <ion-icon name="log-out"></ion-icon><span>Sair</span>
+        </a>
+        <a href="https://hinovace.atlassian.net/servicedesk/customer/portal/2">
+            <ion-icon name="help"></ion-icon> <span> ajuda </span>
+        </a>
 
     </div>
     <!--Fim sidebar-->
     <div class="containerGeral">
 
         <div class="conteudoDash">
-            
+
             <h2>Visão Geral</h2>
 
             <div class="containerdash">
 
-                <div class="dash">
-
-                    <!--Gráficos-->
-                    
-                    <div class="contGraf">
-                        <h3>Medidas médias por horário</h3>
-                        <canvas id="myChart" class="grafico"></canvas>
-                    </div>
-
-                    <div class="contGraf">
-                        <h3>Medianas da semana</h3>
-                        <canvas id="Barras" class="grafico"></canvas>
-                    </div>
+                <div id="conteudoCards" class="conteudoCards">
 
                 </div>
-                </div>
-                <div class="containerkpi">
-                    <div class="kpi1">
-                        <div class="dado">Setor 1A <br></div>
-                        <div class="dado">2</div>
-                    </div>
 
-                    <div class="kpi1">
-                        <div class="dado">Setor 1A <br></div>
-                        <div class="dado">2</div>
-                    </div>
-                </div>
-                <div class="contrecados">
-                
-                    <div class="recados">
-                        
-                        <h1>Mural de avisos</h1>
-                        <br><br>
-                        
-                        <span class="critico temperaturaAlarmante">O setor 2B está a 10 minutos acima da temperatura</span>
-                        <span class="atencao temperaturaAlta">O setor 1A está se aproximando da temperatura limite</span>
-                        <span class="atencao temperaturaBaixa">O setor 1A Está se aproximando de um nível baixo de Umidade</span>
-                    </div>
 
-                </div>    
+            </div>
         </div>
     </div>
 
 </body>
+
 </html>
+
+
+<script>
+
+
+    relacaoSetores(sessionStorage.FK_UNIDADE)
+
+    function relacaoSetores(unidade) {
+        //aguardar();
+        fetch(`/medidas/listar/${unidade}`).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    console.log(resposta);
+                    // feed.appendChild(mensagem);
+                    // alert("Nenhum resultado encontrado!!");
+                    return
+                }
+
+
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var contador = 0
+
+                    resposta.forEach(setor => {
+                        contador++
+
+                        conteudoCards.innerHTML += `<div class="card">
+                            Setor: ${setor.nomeSetor}
+                            <hr>
+                            0°C
+                            </div>`
+                            
+                            if(contador % 2 != 0){
+                                // conteudoCards.innerHTML += '<br>'
+                            }
+
+                            
+                    });
+
+                    
+
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+    }
+
+
+
+
+</script>
 
 
 <script>
@@ -109,14 +147,14 @@
 </script>
 
 
-    <!--Icones-->
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+<!--Icones-->
+<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
-    <!--Script Gráficos-->
+<!--Script Gráficos-->
 <script>
 
-    let proximaAtualizacao;
-    window.onload = obterDadosGrafico(1);
+    // let proximaAtualizacao;
+    // window.onload = obterDadosGrafico(1);
 
     // O gráfico é construído com três funções:
     // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
@@ -129,94 +167,94 @@
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
-    function obterDadosGrafico(idMedida) {
+    // function obterDadosGrafico(idMedida) {
 
 
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
+    //     if (proximaAtualizacao != undefined) {
+    //         clearTimeout(proximaAtualizacao);
+    //     }
 
-        fetch(`/medidas/ultimas/${idMedida}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
+    //     fetch(`/medidas/ultimas/${idMedida}`, { cache: 'no-store' }).then(function (response) {
+    //         if (response.ok) {
+    //             response.json().then(function (resposta) {
+    //                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+    //                 resposta.reverse();
 
-                    plotarGrafico(resposta, idMedida);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-    }
-    function plotarGrafico(resposta) {
+    //                 plotarGrafico(resposta, idMedida);
+    //             });
+    //         } else {
+    //             console.error('Nenhum dado encontrado ou erro na API');
+    //         }
+    //     })
+    //         .catch(function (error) {
+    //             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    //         });
+    // }
+    // function plotarGrafico(resposta) {
 
-console.log('iniciando plotagem do gráfico...');
+    //     console.log('iniciando plotagem do gráfico...');
 
-// Criando estrutura para plotar gráfico - labels
-let labels = [];
+    //     // Criando estrutura para plotar gráfico - labels
+    //     let labels = [];
 
-// Criando estrutura para plotar gráfico - dados
-const linhas = {
-          labels: labels,
-          datasets: [{
-            label: 'Temperatura',
-            backgroundColor: '#E393A6',
-            borderColor: '#E393A6',
-            data: [],
-            fill: false,
-                tension: 0.1
-        },
-        {
-            label: 'Umidade',
-            backgroundColor:  '#5acbda',
-            borderColor: '#5acbda',
-            data: [],
-            fill: false,
-            tension: 0.1
-        }
-        ]
-        };
+    //     // Criando estrutura para plotar gráfico - dados
+    //     const linhas = {
+    //         labels: labels,
+    //         datasets: [{
+    //             label: 'Temperatura',
+    //             backgroundColor: '#E393A6',
+    //             borderColor: '#E393A6',
+    //             data: [],
+    //             fill: false,
+    //             tension: 0.1
+    //         },
+    //         {
+    //             label: 'Umidade',
+    //             backgroundColor: '#5acbda',
+    //             borderColor: '#5acbda',
+    //             data: [],
+    //             fill: false,
+    //             tension: 0.1
+    //         }
+    //         ]
+    //     };
 
-        //Barras
+    //     //Barras
 
 
-console.log('----------------------------------------------')
-console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-console.log(resposta)
+    //     console.log('----------------------------------------------')
+    //     console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+    //     console.log(resposta)
 
-// Inserindo valores recebidos em estrutura para plotar o gráfico
-for (i = 0; i < resposta.length; i++) {
-    var registro = resposta[i];
-    // labels.push(registro.Umidade);
-    linhas.datasets[0].data.push(registro.umidade);
-    linhas.datasets[1].data.push(registro.temperatura);
-}
+    //     // Inserindo valores recebidos em estrutura para plotar o gráfico
+    //     for (i = 0; i < resposta.length; i++) {
+    //         var registro = resposta[i];
+    //         // labels.push(registro.Umidade);
+    //         linhas.datasets[0].data.push(registro.umidade);
+    //         linhas.datasets[1].data.push(registro.temperatura);
+    //     }
 
-console.log('----------------------------------------------')
-console.log('O gráfico será plotado com os respectivos valores:')
-console.log('Labels:')
-console.log(linhas)
-console.log('Dados:')
-console.log(linhas.datasets)
-console.log('----------------------------------------------')
+    //     console.log('----------------------------------------------')
+    //     console.log('O gráfico será plotado com os respectivos valores:')
+    //     console.log('Labels:')
+    //     console.log(linhas)
+    //     console.log('Dados:')
+    //     console.log(linhas.datasets)
+    //     console.log('----------------------------------------------')
 
-// Criando estrutura para plotar gráfico - config
-const config = {
-    type: 'line',
-    data: linhas,
-};
+    //     // Criando estrutura para plotar gráfico - config
+    //     const config = {
+    //         type: 'line',
+    //         data: linhas,
+    //     };
 
-// Adicionando gráfico criado em div na tela
-let myChart = new Chart(
-    document.getElementById(`myChart`),
-    config
-);
+    //     // Adicionando gráfico criado em div na tela
+    //     let myChart = new Chart(
+    //         document.getElementById(`myChart`),
+    //         config
+    //     );
 
-}
+    // }
 
 
 </script>
