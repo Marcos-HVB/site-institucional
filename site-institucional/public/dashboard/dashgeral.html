@@ -167,12 +167,16 @@ const linhas = {
             backgroundColor: '#E393A6',
             borderColor: '#E393A6',
             data: [],
+            fill: false,
+                tension: 0.1
         },
         {
             label: 'Umidade',
             backgroundColor:  '#5acbda',
             borderColor: '#5acbda',
             data: [],
+            fill: false,
+            tension: 0.1
         }
         ]
         };
@@ -187,23 +191,23 @@ console.log(resposta)
 // Inserindo valores recebidos em estrutura para plotar o gráfico
 for (i = 0; i < resposta.length; i++) {
     var registro = resposta[i];
-    labels.push(registro.medida);
-    dados.datasets[0].data.push(registro.Umidade);
-    dados.datasets[1].data.push(registro.Temperatura);
+    // labels.push(registro.Umidade);
+    linhas.datasets[0].data.push(registro.umidade);
+    linhas.datasets[1].data.push(registro.temperatura);
 }
 
 console.log('----------------------------------------------')
 console.log('O gráfico será plotado com os respectivos valores:')
 console.log('Labels:')
-console.log(labels)
+console.log(linhas)
 console.log('Dados:')
-console.log(dados.datasets)
+console.log(linhas.datasets)
 console.log('----------------------------------------------')
 
 // Criando estrutura para plotar gráfico - config
 const config = {
     type: 'line',
-    data: dados,
+    data: linhas,
 };
 
 // Adicionando gráfico criado em div na tela

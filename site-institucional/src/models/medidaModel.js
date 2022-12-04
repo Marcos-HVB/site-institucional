@@ -5,9 +5,9 @@ function buscarUltimasMedidas(idMedida, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select avg(temperatura),avg(umidade) from medida;`;
+        instrucaoSql = `select avg(temperatura) as temperatura,avg(umidade) as umidade from medida;`
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select avg(temperatura),avg(umidade) from medida;`;
+        instrucaoSql = `select avg(temperatura) as temperatura,avg(umidade) as umidade from medida;`
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -22,10 +22,10 @@ function buscarMedidasEmTempoReal(idMedida) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select avg(temperatura),avg(umidade) from medida;`;
+        instrucaoSql = `select avg(temperatura) as temperatura,avg(umidade) as umidade from medida;`
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select avg(temperatura),avg(umidade) from medida;`;
+        instrucaoSql = `select avg(temperatura) as temperatura,avg(umidade) as umidade from medida;`
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
