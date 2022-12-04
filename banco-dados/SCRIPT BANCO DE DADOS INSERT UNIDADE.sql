@@ -108,6 +108,10 @@ insert into unidade values
 (null,'Eurofarma','Unidade Matriz Tatuape','Mota souza','10','Tatuape','08498754','proximo ao HOSPITAL almeida','04966357511110',null),
 (null,'Medley Indústria Farmacêutica','Unidade Matriz Eng.Goulart','Av. Alameda','545','engenheiro goulart','08401123','Andar de cima a o restaurante','04966357000180',null);
 
+
+select temperatura,umidade,idSensor,idSetor from medida join relatorio on idMedida=fkMedida join sensor on fkSensor=idSensor join setor on sensor.fkSetor =idSetor;
+
+
 select * from usuario;
-select * from unidade;
+select * from medida;
 select * from unidade;
