@@ -14,6 +14,23 @@
 </head>
 
 <body>
+
+    <div class="corpoModal" id="corpoModal">
+        <div class="modalDeAviso" id="corpoModal">
+            <div class="botaoModal" id="botaoModal">
+                <button class="letra-x" onclick="sumirModal()"></button>
+            </div>
+            <div class="titulo" id="tituloModal">
+                Atenção!
+            </div>
+            <div class="corpo" id="corpoTextoModal">
+                Revise e preencha todos os campos!
+            </div>
+        </div>
+    </div>
+
+
+
     <a href="dashgeral.html">
         <div class="logo">
             <img src="../imgs/voltar.png" alt="">
@@ -40,15 +57,15 @@
                 <div class="campo" id="selectRemedio">
 
                 </div>
-
+<!-- 
                 <div class="campoCheck">
                     <div class="checkbox">
                         <input type="checkbox" id="checkRemember">
                         <label for="checkRemember">Aceito <b>todos</b> os termos de uso</label>
                     </div>
-                </div>
+                </div> -->
                 <div class="button2">
-                    <button class="login" onclick="cadastrar()">Cadastrar</button>
+                    <button class="login" onclick="cadastrarSensor()">Cadastrar</button>
                 </div>
             </div>
         </div>
@@ -71,11 +88,10 @@
         fetch(`/medidas/listar/${unidade}`).then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
-                    var feed = document.getElementById("feed_container");
-                    var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
-                    feed.appendChild(mensagem);
-                    throw "Nenhum resultado encontrado!!";
+                    console.log(resposta);
+                    // feed.appendChild(mensagem);
+                    alert("Nenhum resultado encontrado!!");
+                    return
                 }
 
 
@@ -114,11 +130,11 @@
         // Agora vá para o método fetch logo abaixo
         // const elements = document.getElementsByClassName('corpoModal');
 
-        var nomesensor = in_sensor.value
-        var setor = in_setor.value
-        var remedio = in_remedio.value
+        var nomeSensor = in_nomeSensor.value
+        var fkSetor = sel_setor.value
+        var fkUnidade = sessionStorage.FK_UNIDADE
 
-        if (primeiroNome == "" || sobrenome == "" || unidade == "" || cargo == "" || email == "" || senha == "" || confirmarSenha == "") {
+        if (nomeSensor == "" || fkSetor == "" || fkUnidade == "") {
             const elements = document.getElementsByClassName('corpoModal');
             elements[0].style.display = "block"
             return false;
@@ -126,7 +142,7 @@
 
 
         // Enviando o valor da nova input
-        fetch("/usuarios/cadastrar", {
+        fetch("/medidas/cadastrarSensor", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -134,9 +150,9 @@
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                nomesensorServer: nomesensor,
-                setorServer: setor,
-                remedioServer: remedio
+                nomeSensorServer: nomeSensor,
+                fkSetorServer: fkSetor,
+                fkUnidadeServer: fkUnidade
             })
         }).then(function (resposta) {
 

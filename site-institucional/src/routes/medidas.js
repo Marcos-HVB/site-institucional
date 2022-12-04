@@ -13,8 +13,8 @@ router.get("/listar/:fkUnidade", function (req, res) {
 });
 
 
-router.post("/cadastrarsensor", function (req, res) {
-    usuarioController.cadastrarsensor(req, res);
+router.post("/cadastrarSensor", function (req, res) {
+    medidaController.cadastrarSensor(req, res);
 })
 
 router.get("/tempo-real/:idAquario", function (req, res) {

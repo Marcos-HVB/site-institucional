@@ -48,7 +48,6 @@ CREATE TABLE IF NOT EXISTS setor (
 );
 
 
-
 CREATE TABLE IF NOT EXISTS usuario (
     idUsuario INT AUTO_INCREMENT,
     nome VARCHAR(45),
@@ -65,9 +64,8 @@ CREATE TABLE IF NOT EXISTS usuario (
 
 
 CREATE TABLE IF NOT EXISTS sensor (
-    idSensor INT,
+    idSensor INT auto_increment,
     nomeSensor VARCHAR(45),
-    dthora DATETIME,
     fkSetor INT,
     fkUnidade INT,
     FOREIGN KEY (fkSetor)
@@ -111,10 +109,6 @@ insert into unidade values
 (null,'Eurofarma','Unidade Matriz Tatuape','Mota souza','10','Tatuape','08498754','proximo ao HOSPITAL almeida','04966357511110',null),
 (null,'Medley Indústria Farmacêutica','Unidade Matriz Eng.Goulart','Av. Alameda','545','engenheiro goulart','08401123','Andar de cima a o restaurante','04966357000180',null);
 
-select * from setor;
-select * from remedio;
-select * from unidade;
-
 
 insert into setor values
 (null,'Setor Talidomida','Ala 1B 2ºAndar',1,1),
@@ -124,14 +118,19 @@ insert into setor values
 (null,'Setor Transtuzumabe','Ala M 5ºAndar',5,3),
 (null,'Setor Nilotinibe','Ala C 6ºAndar',6,7),
 (null,'Setor Pertuzumabe','Ala 2B 7ºAndar',7,2),
-(null,'Setor Zidovudina','Ala D 2ºAndar',8,5);
+(null,'Setor Zidovudina','Ala D 2ºAndar',8,5),
+(null, 'Setor Zidovudina', 'Ala 2 2°Andar', 8, 6),
+(null, 'Setor Pertuzumabe', 'Ala 2 3°Andar', 7, 6),
+(null, 'Setor Nilotinibe', 'Ala 2 1°Andar', 6, 6);
+    
 
 
+SELECT * FROM setor where fkUnidade = 5;
+
+select temperatura,idSensor,idSetor from medida join relatorio on idMedida=fkMedida join sensor on fkSensor=idSensor join setor on sensor.fkSetor =idSetor;
 
 
-select temperatura,umidade,idSensor,idSetor from medida join relatorio on idMedida=fkMedida join sensor on fkSensor=idSensor join setor on sensor.fkSetor =idSetor;
-
-
-select * from usuario;
-select * from medida;
+select * from setor;
+select * from remedio;
 select * from unidade;
+select * from sensor;
