@@ -5,9 +5,9 @@ function buscarUltimasMedidas(idMedida, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select avg(temperatura) as temperatura,avg(umidade) as umidade from medida;`
+        instrucaoSql = `select temperatura,umidade from medida order by desc idMedida;`
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select avg(temperatura) as temperatura,avg(umidade) as umidade from medida;`
+        instrucaoSql = `select * from medida;`
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return

@@ -93,7 +93,7 @@ h2 {
 .amarelo:hover,
 .vermelho:hover {
     /* SE DESCOMENTAR ESSE PADDIN O BAGULHO VAI SE MEXER PRA EXPANDIR  */
-    /* padding: 35px; */
+    padding: 35px;
     color: white;
     transition: 0.4s;
     /* box-shadow: -3px 3px #00000055; */
