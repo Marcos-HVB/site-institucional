@@ -276,128 +276,152 @@
 
 
     
-    let proximaAtualizacao;
-
-    window.onload = obterDadosGrafico();
-
-
+    
+    
     // verificar_autenticacao();
 
     // function alterarTitulo(idMedida) {
-    //     var idMedida= document.getElementById(`tituloAquario`)
+        //     var idMedida= document.getElementById(`tituloAquario`)
     // }
     // O gráfico é construído com três funções:
     // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
     // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
     // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
+    
     // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
     // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
     // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
+    
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
-    function obterDadosGrafico(idMedida) {
 
-        // alterarTitulo(idMedida)
 
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
 
-        fetch(`/medidas/ultimas/${idMedida}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+
+
+
+
+
+
+
+    
+
+// DASHBOARD QUE TA FUNCIONANDO LOGO ABAIXO
+
+
+
+
+
+
+
+
+
+
+//     let proximaAtualizacao;
+
+//     window.onload = obterDadosGrafico();
+//     function obterDadosGrafico(idMedida) {
+
+//         // alterarTitulo(idMedida)
+
+//         if (proximaAtualizacao != undefined) {
+//             clearTimeout(proximaAtualizacao);
+//         }
+
+//         fetch(`/medidas/ultimas/${idMedida}`, { cache: 'no-store' }).then(function (response) {
+//             if (response.ok) {
+//                 response.json().then(function (resposta) {
+//                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 
                     
-                    // var nome = [];
-                    // var dados = [];                   
-                    // for(var i =0; i<resposta.length;i++){
-                    //     nome.push(resposta[i].temperatura);
-                    //     dados.push(resposta[i].umidade);
-                    // }
+//                     // var nome = [];
+//                     // var dados = [];                   
+//                     // for(var i =0; i<resposta.length;i++){
+//                     //     nome.push(resposta[i].temperatura);
+//                     //     dados.push(resposta[i].umidade);
+//                     // }
 
-                    plotarGrafico(resposta)
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-    }
+//                     plotarGrafico(resposta)
+//                 });
+//             } else {
+//                 console.error('Nenhum dado encontrado ou erro na API');
+//             }
+//         })
+//             .catch(function (error) {
+//                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+//             });
+//     }
 
-    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+//     // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+//     // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+//     // A função *plotarGrafico* também invoca a função *atualizarGrafico*
 
-    function plotarGrafico(resposta) {
-        console.log('ENTROU NO PLOTAR GRAFICO');
+//     function plotarGrafico(resposta) {
+//         console.log('ENTROU NO PLOTAR GRAFICO');
 
-        console.log('iniciando plotagem do gráfico...');
+//         console.log('iniciando plotagem do gráfico...');
 
-        // Criando estrutura para plotar gráfico - labels
-        let labels = [];
+//         // Criando estrutura para plotar gráfico - labels
+//         let labels = [];
 
-        // Criando estrutura para plotar gráfico - dados
-        const dados = {
-            labels: labels,
-            datasets: [{
-                label:'Umidade',
-                data:[],
-                // fill: false,
-                borderColor: ['rgb(0,0,255)'],
-                // tension: 0.1,
-                backgroundColor:['rgb(1,1,255)']
-            },
-            {
-                label: 'Temperatura',
-                data: [],
-                // fill: false,
-                borderColor: 'rgb(255,0,0)',
-                // tension: 0.1
-                backgroundColor:['rgb(255,0,0)']
-            }
-        ]
-        };
+//         // Criando estrutura para plotar gráfico - dados
+//         const dados = {
+//             labels: labels,
+//             datasets: [{
+//                 label:'Umidade',
+//                 data:[],
+//                 // fill: false,
+//                 borderColor: ['rgb(0,0,255)'],
+//                 // tension: 0.1,
+//                 backgroundColor:['rgb(1,1,255)']
+//             },
+//             {
+//                 label: 'Temperatura',
+//                 data: [],
+//                 // fill: false,
+//                 borderColor: 'rgb(255,0,0)',
+//                 // tension: 0.1
+//                 backgroundColor:['rgb(255,0,0)']
+//             }
+//         ]
+//         };
 
 
 
-        // Inserindo valores recebidos em estrutura para plotar o gráfico
-        for (i = resposta.length-4; i < resposta.length; i++) {
-            var registro = resposta[i];
-            labels.push(registro.dthora);
-            dados.datasets[0].data.push(registro.umidade);
-            dados.datasets[1].data.push(registro.temperatura);
+//         // Inserindo valores recebidos em estrutura para plotar o gráfico
+//         for (i = resposta.length-4; i < resposta.length; i++) {
+//             var registro = resposta[i];
+//             labels.push(registro.dthora);
+//             dados.datasets[0].data.push(registro.umidade);
+//             dados.datasets[1].data.push(registro.temperatura);
 
-            if(dados.datasets[0].data.length >= 6){
-                dados.datasets[0].data.shift()
-                dados.datasets[1].data.shift()
-            }
+//             if(dados.datasets[0].data.length >= 6){
+//                 dados.datasets[0].data.shift()
+//                 dados.datasets[1].data.shift()
+//             }
 
         
-        }
+//         }
 
        
-        // Criando estrutura para plotar gráfico - config
-        const config = {
-            type: 'line',
-            data: dados,
-        };
+//         // Criando estrutura para plotar gráfico - config
+//         const config = {
+//             type: 'line',
+//             data: dados,
+//         };
 
-        // Adicionando gráfico criado em div na tela
-        const myChart = new Chart(
-            document.getElementById(`myChart`),
-            config
-        );
+//         // Adicionando gráfico criado em div na tela
+//         const myChart = new Chart(
+//             document.getElementById(`myChart`),
+//             config
+//         );
 
-        setInterval(() => {
-            obterDadosGrafico()
-        }, 2000);
+//         setInterval(() => {
+//             obterDadosGrafico()
+//         }, 2000);
 
-};
+// };
 
 
 </script>

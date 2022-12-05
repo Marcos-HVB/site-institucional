@@ -5,7 +5,8 @@ function buscarUltimasMedidas(idMedida, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select temperatura,umidade from medida order by desc idMedida;`
+        instrucaoSql = `select temperatura,umidade from medida order by desc idMedida;
+        `
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select * from medida;`
     } else {
