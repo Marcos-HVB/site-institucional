@@ -55,6 +55,10 @@
 
     </div>
     <!--Fim sidebar-->
+    <style>
+        
+
+    </style>
 
 
     <div class="containerGeral">
@@ -62,20 +66,18 @@
         <h2>Painel de Avisos</h2>
         <div class="recados">
 
-            <div class="atention">
-                <h3>Umidade se aproximando do nível crítico</h3>
-            </div>
-            <div class="atention">
+           
+            <div class="atention" id="atention1">
+                <h2>Umidade se aproximando do nível crítico</h2><br>
                 <h3>Umidade atual</h3>
-                <h1>70</h1>
+                <h1 id="umidadeAtual">70</h1>
             </div>
-            <div class="caution">
+            <div class="caution" id="caution1">
+                <h2 id="lengendatemperatura">Temperatura crítica</h2><br>
                 <h3>Temperatura atual</h3>
-                <h1>23</h1>
+                <h1 id="temperaturaAtual">23</h1>
             </div>
-            <div class="caution">
-                <h3>Temperatura crítica</h3>
-            </div>
+            
 
         </div>
 
@@ -85,7 +87,7 @@
             <!--Gráficos-->
             <div class="containerdash">
                 <div class="contGraf">
-                    <h3>Medidas médias por horário</h3>
+                    <h3 class="pro lado">Medidas médias por horário</h3>
                     <canvas id="myChart" style="height: 35vh; width: 80vh;"></canvas>
                 </div>
 
@@ -251,9 +253,38 @@
                 config
             );
 
-            setInterval(() => {
-                obterDadosGrafico()
-            }, 2000);
+            console.log(dados.datasets[0].data[dados.datasets[0].data.length - 1]);
+            console.log(dados.datasets[1].data[dados.datasets[1].data.length - 1]);
+
+            umidadeAtual.innerHTML = dados.datasets[0].data[dados.datasets[0].data.length - 1]
+            temperaturaAtual.innerHTML = dados.datasets[1].data[dados.datasets[1].data.length - 1]
+            lengendatemperatura.innerHTML = 'Temperatura boa'
+            var temperatura = dados.datasets[1].data[dados.datasets[1].data.length - 1]
+            var umidade = dados.datasets[0].data[dados.datasets[0].data.length - 1]
+
+            if(umidade>=40 && umidade<=70){
+                console.log('entrou umidade');
+                atention1.style.backgroundColor = "#0f0";
+            }else if((umidade>70 && umidade<=85)||(umidade<40&&umidade>25)){
+                atention1.style.backgroundColor = "yellow";
+            }else {
+                atention1.style.backgroundColor = "red";
+            }
+            
+
+
+            if (temperatura >=15 && temperatura <=30) {
+                console.log('entrou');
+                caution1.style.backgroundColor = "#0f0";
+            }else if((temperatura>31)||(temperatura<15)){
+                caution1.style.backgroundColor = "red";
+            }
+
+
+
+            // setInterval(() => {
+            //     obterDadosGrafico()
+            // }, 2000);
 
         };
         // LINHAS
@@ -265,46 +296,57 @@
 
 
 
-        const barras = {
-            labels: labelsbar,
-            datasets: [{
-                label: 'Mediana de Temperatura ',
-                backgroundColor: '#E393A6',
-                borderColor: '#E393A6',
-                data: [11.75, 12, 11.2, 10, 10.5, 14, 12.3],
-            },
-            {
-                label: 'Mediana de Umidade ',
-                backgroundColor: '#5acbda',
-                borderColor: '#5acbda',
-                data: [70, 79, 73, 80, 65, 70, 70],
-            }
-            ]
-        };
+        // const barras = {
+        //     labels: labelsbar,
+        //     datasets: [{
+        //         label: 'Mediana de Temperatura ',
+        //         backgroundColor: '#E393A6',
+        //         borderColor: '#E393A6',
+        //         data: [11.75, 12, 11.2, 10, 10.5, 14, 12.3],
+        //     },
+        //     {
+        //         label: 'Mediana de Umidade ',
+        //         backgroundColor: '#5acbda',
+        //         borderColor: '#5acbda',
+        //         data: [70, 79, 73, 80, 65, 70, 70],
+        //     }
+        //     ]
+        // };
 
-        const configlin = {
-            type: 'line',
-            data: linhas,
-            options: {}
-        };
+        // const configlin = {
+        //     type: 'line',
+        //     data: linhas,
+        //     options: {}
+        // };
 
-        const configbar = {
-            type: 'bar',
-            data: barras,
-            options: {}
-        };
+        // const configbar = {
+        //     type: 'bar',
+        //     data: barras,
+        //     options: {}
+        // };
     </script>
 
     <script>
-        const chLinha = new Chart(
-            document.getElementById('Linhas'),
-            configlin
-        );
+        // const chLinha = new Chart(
+        //     document.getElementById('Linhas'),
+        //     configlin
+        // );
 
-        const chBarra = new Chart(
-            document.getElementById('Barras'),
-            configbar
-        );
+        // const chBarra = new Chart(
+        //     document.getElementById('Barras'),
+        //     configbar
+        // );
+
+    </script>   
+    <script>
+
+
+
+
+
+
+
+
 
     </script>
 

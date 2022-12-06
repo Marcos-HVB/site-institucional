@@ -76,11 +76,11 @@
         </div>
         <div class="avisos">
 
-            <div class="vermelho"> <h2>Estado critico</h2><br> <span> Se a Temperatura de seu sensor ULTRAPASSAR os 20.2ºC </span></div>
+            <div class="vermelho" onmouseenter="legendaAparecer.style.display='block'" onmouseleave="legendaAparecer.style.display='none'"> <h2>Estado critico</h2><br> <span class="legendaAparecer" id="legendaAparecer">Se a temperatura estiver maior que 37.5°C ou menor que 7.5°C</span></div>
 
-            <div class="amarelo"> <h2>Atenção</h2><br><span>Temperatura do Sensor maior que 15Cº tome precauções</span></div>
+            <div class="amarelo" id="estadosTemperatura"  onmouseenter="legendaAparecer2.style.display='block'" onmouseleave="legendaAparecer2.style.display='none'"> <h2>Atenção</h2><br><span class="legendaAparecer" id="legendaAparecer2">Se a temperatura estiver maior que 30°C ou menor que 15°C</span></div>
 
-            <div class="verde"> <h2>Está tudo ok!</h2><br> <span> Temperatura abaixo de 13.2Cº</span></div>
+            <div class="verde" id="estadosTemperatura"  onmouseenter="legendaAparecer3.style.display='block'" onmouseleave="legendaAparecer3.style.display='none'"> <h2>Está tudo ok!</h2><br> <span class="legendaAparecer" id="legendaAparecer3">Se a temperatura estiver entre 15°C e 30°C</span></div>
 
 
 
@@ -122,13 +122,16 @@
 
                     resposta.forEach(setor => {
                         contador++
+                        var temperaturaSorteada = parseInt(20 + Math.random() * 10)
 
                         conteudoCards.innerHTML += `<div class="card">
                             Setor: ${setor.nomeSetor}<br>
                             Local: ${setor.localSetor}
                             <hr>
-                           Temperatura:<span id="trocarvalor">0</span> °C
+                           Temperatura:<span id="trocarvalor">${temperaturaSorteada}</span> °C
                             </div>`
+
+                            
 
                         if (contador % 2 != 0) {
                             // conteudoCards.innerHTML += '<br>'
@@ -186,91 +189,93 @@
     // function obterDadosGrafico(idMedida) {
 
 
-        // if (proximaAtualizacao != undefined) {
-        //     clearTimeout(proximaAtualizacao);
-        // }
+        if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
 
-    //     fetch(`/medidas/ultimas/${idMedida}`, { cache: 'no-store' }).then(function (response) {
-    //         if (response.ok) {
-    //             response.json().then(function (resposta) {
-    //                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-    //                 resposta.reverse();
+        fetch(`/medidas/ultimas/${idMedida}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
 
-    //                 plotarGrafico(resposta, idMedida);
-    //             });
-    //         } else {
-    //             console.error('Nenhum dado encontrado ou erro na API');
-    //         }
-    //     })
-    //         .catch(function (error) {
-    //             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    //         });
-    // }
-    // function plotarGrafico(resposta) {
-
-    //     console.log('iniciando plotagem do gráfico...');
-
-    //     // Criando estrutura para plotar gráfico - labels
-    //     let labels = [];
-
-    //     // Criando estrutura para plotar gráfico - dados
-    //     const linhas = {
-    //         labels: labels,
-    //         datasets: [{
-    //             label: 'Temperatura',
-    //             backgroundColor: '#E393A6',
-    //             borderColor: '#E393A6',
-    //             data: [],
-    //             fill: false,
-    //             tension: 0.1
-    //         },
-    //         {
-    //             label: 'Umidade',
-    //             backgroundColor: '#5acbda',
-    //             borderColor: '#5acbda',
-    //             data: [],
-    //             fill: false,
-    //             tension: 0.1
-    //         }
-    //         ]
-    //     };
-
-    //     //Barras
+                    plotarGrafico(resposta, idMedida);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    
 
 
-    //     console.log('----------------------------------------------')
-    //     console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-    //     console.log(resposta)
+    function plotarGrafico(resposta) {
 
-    //     // Inserindo valores recebidos em estrutura para plotar o gráfico
-    //     for (i = 0; i < resposta.length; i++) {
-    //         var registro = resposta[i];
-    //         // labels.push(registro.Umidade);
-    //         linhas.datasets[0].data.push(registro.umidade);
-    //         linhas.datasets[1].data.push(registro.temperatura);
-    //     }
+        console.log('iniciando plotagem do gráfico...');
 
-    //     console.log('----------------------------------------------')
-    //     console.log('O gráfico será plotado com os respectivos valores:')
-    //     console.log('Labels:')
-    //     console.log(linhas)
-    //     console.log('Dados:')
-    //     console.log(linhas.datasets)
-    //     console.log('----------------------------------------------')
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
 
-    //     // Criando estrutura para plotar gráfico - config
-    //     const config = {
-    //         type: 'line',
-    //         data: linhas,
-    //     };
+        // Criando estrutura para plotar gráfico - dados
+        const linhas = {
+            labels: labels,
+            datasets: [{
+                label: 'Temperatura',
+                backgroundColor: '#E393A6',
+                borderColor: '#E393A6',
+                data: [],
+                fill: false,
+                tension: 0.1
+            },
+            {
+                label: 'Umidade',
+                backgroundColor: '#5acbda',
+                borderColor: '#5acbda',
+                data: [],
+                fill: false,
+                tension: 0.1
+            }
+            ]
+        };
 
-    //     // Adicionando gráfico criado em div na tela
-    //     let myChart = new Chart(
-    //         document.getElementById(`myChart`),
-    //         config
-    //     );
+        //Barras
 
-    // }
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            // labels.push(registro.Umidade);
+            linhas.datasets[0].data.push(registro.umidade);
+            linhas.datasets[1].data.push(registro.temperatura);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(linhas)
+        console.log('Dados:')
+        console.log(linhas.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'line',
+            data: linhas,
+        };
+
+        // Adicionando gráfico criado em div na tela
+        let myChart = new Chart(
+            document.getElementById(`myChart`),
+            config
+        );
+
+    }
 
 
 
@@ -278,150 +283,129 @@
     
     
     
-    // verificar_autenticacao();
+    verificar_autenticacao();
 
-    // function alterarTitulo(idMedida) {
-        //     var idMedida= document.getElementById(`tituloAquario`)
-    // }
-    // O gráfico é construído com três funções:
-    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+    function alterarTitulo(idMedida) {
+            var idMedida= document.getElementById(`tituloAquario`)
+    }
+//     O gráfico é construído com três funções:
+//     1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+//     2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+//     3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
     
-    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+//     Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+//     para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+//     A função *obterDadosGrafico* também invoca a função *plotarGrafico*
     
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-
-
-
-
-
-
-
-
-
-
+//         Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+//         Para ajustar o "select", ajuste o comando sql em src/models
 
     
 
 // DASHBOARD QUE TA FUNCIONANDO LOGO ABAIXO
 
 
+    let proximaAtualizacao;
 
+    window.onload = obterDadosGrafico();
+    function obterDadosGrafico(idMedida) {
 
+        // alterarTitulo(idMedida)
 
+        if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
 
-
-
-
-
-//     let proximaAtualizacao;
-
-//     window.onload = obterDadosGrafico();
-//     function obterDadosGrafico(idMedida) {
-
-//         // alterarTitulo(idMedida)
-
-//         if (proximaAtualizacao != undefined) {
-//             clearTimeout(proximaAtualizacao);
-//         }
-
-//         fetch(`/medidas/ultimas/${idMedida}`, { cache: 'no-store' }).then(function (response) {
-//             if (response.ok) {
-//                 response.json().then(function (resposta) {
-//                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+        fetch(`/medidas/ultimas/${idMedida}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 
                     
-//                     // var nome = [];
-//                     // var dados = [];                   
-//                     // for(var i =0; i<resposta.length;i++){
-//                     //     nome.push(resposta[i].temperatura);
-//                     //     dados.push(resposta[i].umidade);
-//                     // }
+                    // var nome = [];
+                    // var dados = [];                   
+                    // for(var i =0; i<resposta.length;i++){
+                    //     nome.push(resposta[i].temperatura);
+                    //     dados.push(resposta[i].umidade);
+                    // }
 
-//                     plotarGrafico(resposta)
-//                 });
-//             } else {
-//                 console.error('Nenhum dado encontrado ou erro na API');
-//             }
-//         })
-//             .catch(function (error) {
-//                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-//             });
-//     }
+                    plotarGrafico(resposta)
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
 
-//     // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-//     // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-//     // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
 
-//     function plotarGrafico(resposta) {
-//         console.log('ENTROU NO PLOTAR GRAFICO');
+    function plotarGrafico(resposta) {
+        console.log('ENTROU NO PLOTAR GRAFICO');
 
-//         console.log('iniciando plotagem do gráfico...');
+        console.log('iniciando plotagem do gráfico...');
 
-//         // Criando estrutura para plotar gráfico - labels
-//         let labels = [];
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
 
-//         // Criando estrutura para plotar gráfico - dados
-//         const dados = {
-//             labels: labels,
-//             datasets: [{
-//                 label:'Umidade',
-//                 data:[],
-//                 // fill: false,
-//                 borderColor: ['rgb(0,0,255)'],
-//                 // tension: 0.1,
-//                 backgroundColor:['rgb(1,1,255)']
-//             },
-//             {
-//                 label: 'Temperatura',
-//                 data: [],
-//                 // fill: false,
-//                 borderColor: 'rgb(255,0,0)',
-//                 // tension: 0.1
-//                 backgroundColor:['rgb(255,0,0)']
-//             }
-//         ]
-//         };
+        // Criando estrutura para plotar gráfico - dados
+        const dados = {
+            labels: labels,
+            datasets: [{
+                label:'Umidade',
+                data:[],
+                // fill: false,
+                borderColor: ['rgb(0,0,255)'],
+                // tension: 0.1,
+                backgroundColor:['rgb(1,1,255)']
+            },
+            {
+                label: 'Temperatura',
+                data: [],
+                // fill: false,
+                borderColor: 'rgb(255,0,0)',
+                // tension: 0.1
+                backgroundColor:['rgb(255,0,0)']
+            }
+        ]
+        };
 
 
 
-//         // Inserindo valores recebidos em estrutura para plotar o gráfico
-//         for (i = resposta.length-4; i < resposta.length; i++) {
-//             var registro = resposta[i];
-//             labels.push(registro.dthora);
-//             dados.datasets[0].data.push(registro.umidade);
-//             dados.datasets[1].data.push(registro.temperatura);
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = resposta.length-4; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.dthora);
+            dados.datasets[0].data.push(registro.umidade);
+            dados.datasets[1].data.push(registro.temperatura);
 
-//             if(dados.datasets[0].data.length >= 6){
-//                 dados.datasets[0].data.shift()
-//                 dados.datasets[1].data.shift()
-//             }
+            if(dados.datasets[0].data.length >= 6){
+                dados.datasets[0].data.shift()
+                dados.datasets[1].data.shift()
+            }
 
         
-//         }
+        }
 
        
-//         // Criando estrutura para plotar gráfico - config
-//         const config = {
-//             type: 'line',
-//             data: dados,
-//         };
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'line',
+            data: dados,
+        };
 
-//         // Adicionando gráfico criado em div na tela
-//         const myChart = new Chart(
-//             document.getElementById(`myChart`),
-//             config
-//         );
+        // Adicionando gráfico criado em div na tela
+        const myChart = new Chart(
+            document.getElementById(`myChart`),
+            config
+        );
 
-//         setInterval(() => {
-//             obterDadosGrafico()
-//         }, 2000);
 
-// };
+};
 
 
 </script>
