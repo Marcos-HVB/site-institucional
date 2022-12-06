@@ -7,7 +7,7 @@ function buscarUltimasMedidas(idMedida, limite_linhas) {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `select temperatura,umidade from medida order by desc idMedida;`
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select * from medida;`
+        instrucaoSql = `select temperatura, umidade, DATE_FORMAT(dthora,'%H:%i:%s') as momento_grafico from medida order by idMedida desc limit ${limite_linhas}`
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -22,10 +22,10 @@ function buscarMedidasEmTempoReal(idMedida) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select avg(temperatura) as temperatura,avg(umidade) as umidade from medida;`
+        instrucaoSql = `select avg(temperatura) as temperatura,avg(umidade) as umidade from medida`
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select avg(temperatura) as temperatura,avg(umidade) as umidade from medida;`
+        instrucaoSql = `select umidade, temperatura, DATE_FORMAT(dthora,'%H:%i:%s') as momento_grafico from medida order by idMedida desc limit 1`
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -51,7 +51,7 @@ function cadastrarSensor(nomeSensor, fkUnidade, fkSetor) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        INSERT INTO sensor (nomeSensor, fkSetor, fkUnidade) VALUES ('${nomeSensor}', ${fkSetor}, ${fkUnidade});
+        INSERT INTO sensor (nomeSensor, fkSetor, fkUnidade) VALUES ('${nomeSensor}', ${fkSetor}, ${fkUnidade})
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
