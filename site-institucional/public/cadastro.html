@@ -109,7 +109,7 @@
         var senha = in_senha.value
         var confirmarSenha = in_confirmarSenha.value
 
-        if (primeiroNome == "" || sobrenome == "" || unidade == "" || cargo == "" || email == "" || senha == "" || confirmarSenha == "") {
+        if (primeiroNome == "" || sobrenome == "" || unidade == "" || cargo == "" || email == "" || senha == "" || confirmarSenha == "" || (senha != confirmarSenha)) {
             const elements = document.getElementsByClassName('corpoModal');
             elements[0].style.display = "block"
             return false;
