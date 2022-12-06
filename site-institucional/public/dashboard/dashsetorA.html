@@ -70,12 +70,12 @@
             <div class="atention" id="atention1">
                 <h2>Umidade se aproximando do nível crítico</h2><br>
                 <h3>Umidade atual</h3>
-                <h1 id="umidadeAtual">70</h1>
+                <h1 id="umidadeAtual"></h1>
             </div>
             <div class="caution" id="caution1">
                 <h2 id="lengendatemperatura">Temperatura crítica</h2><br>
                 <h3>Temperatura atual</h3>
-                <h1 id="temperaturaAtual">23</h1>
+                <h1 id="temperaturaAtual"></h1>
             </div>
             
 
@@ -270,25 +270,46 @@
             var temperatura = dados.datasets[1].data[dados.datasets[1].data.length - 1]
             var umidade = dados.datasets[0].data[dados.datasets[0].data.length - 1]
 
-            // if(umidade>=40 && umidade<=70){
-            //     console.log('entrou umidade');
-            //     atention1.style.backgroundColor = "#0f0";
-            // }else if((umidade>70 && umidade<=85)||(umidade<40&&umidade>25)){
-            //     atention1.style.backgroundColor = "yellow";
-            // }else {
-            //     atention1.style.backgroundColor = "red";
-            // }
+            if(umidade>=40 || umidade<=70){
+                console.log('entrou umidade');
+                atention1.style.backgroundColor = "#0f0";
+                atention1.innerHTML = `<h2>Umidade está boa</h2><br>
+                <h3>Umidade atual</h3>
+                <h1 id="umidadeAtual">${umidadeAtual.innerHTML}</h1>`
+            }else if((umidade>70 || umidade<=85)||(umidade<40&&umidade>25)){
+                atention1.style.backgroundColor = "#ffff00";
+                atention1.innerHTML = `<h2>Umidade elevada</h2><br>
+                <h3>Umidade atual</h3>
+                <h1 id="umidadeAtual">${umidadeAtual.innerHTML}</h1>`
+            }else {
+                atention1.style.backgroundColor = "red";
+                atention1.innerHTML = `<h2>Umidade crítica</h2><br>
+                <h3>Umidade atual</h3>
+                <h1 id="umidadeAtual">${umidadeAtual.innerHTML}</h1>`
+            }
             
 
 
-            // if (temperatura >=15 && temperatura <=30) {
-            //     console.log('entrou');
-            //     caution1.style.backgroundColor = "#0f0";
-            // }else if((temperatura>31)||(temperatura<15)){
-            //     caution1.style.backgroundColor = "red";
-            // }
+            if (temperatura >=15 || temperatura <=30) {
+                console.log('entrou');
+                caution1.style.backgroundColor = "#0f0";
+                caution1.innerHTML = `<h2>Temperatura está boa</h2><br>
+                <h3>Umidade atual</h3>
+                <h1 id="umidadeAtual">${temperaturaAtual.innerHTML}</h1>`
+            }else if((temperatura>31)||(temperatura<15)){
+                caution1.style.backgroundColor = "red";
+                caution1.innerHTML = `<h2>Temperatura crítica</h2><br>
+                <h3>Umidade atual</h3>
+                <h1 id="umidadeAtual">${temperaturaAtual.innerHTML}</h1>`
+            }
 
-
+            if (temperatura < 15 || temperatura > 30){
+                console.log('entrou atenção');
+                caution1.style.backgroundColor = "#ffff00"
+                caution1.innerHTML = `<h2>Temperatura elevada</h2><br>
+                <h3>Umidade atual</h3>
+                <h1 id="umidadeAtual">${temperaturaAtual.innerHTML}</h1>`
+            }
 
             setTimeout(() => atualizarGrafico(idMedida, dados, Linhas), 2000);
 
