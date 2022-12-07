@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'Oncotech'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C8BA19F40350467385C15D9E74E0680F }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CA704457A94F466E82A1D055EC01BABD }}
           package: .
